@@ -403,7 +403,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"mobile2youChallenge/Preview Content\"";
 				DEVELOPMENT_TEAM = PS78UKHFKZ;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = mobile2youChallenge/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/mobile2youChallenge/Commom/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -425,7 +425,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"mobile2youChallenge/Preview Content\"";
 				DEVELOPMENT_TEAM = PS78UKHFKZ;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = mobile2youChallenge/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/mobile2youChallenge/Commom/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

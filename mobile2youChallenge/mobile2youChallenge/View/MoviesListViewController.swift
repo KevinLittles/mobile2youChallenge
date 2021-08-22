@@ -16,7 +16,7 @@ class MoviesListViewController: UIViewController {
     }
 
     override func loadView() {
-        <#code#>
+        
     }
 
 }
