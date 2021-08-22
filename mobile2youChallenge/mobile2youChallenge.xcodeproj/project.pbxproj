@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -40,6 +40,46 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		648BF3F226D23C3A00D7C689 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		648BF3F326D23C4500D7C689 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		648BF3F426D23C4C00D7C689 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		648BF3F526D23C5600D7C689 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		648BF3F626D23C5F00D7C689 /* Commom */ = {
+			isa = PBXGroup;
+			children = (
+				64D2EDAB26D235670001A0ED /* AppDelegate.swift */,
+				64D2EDAD26D235670001A0ED /* SceneDelegate.swift */,
+				64D2EDB126D2356A0001A0ED /* Assets.xcassets */,
+				64D2EDB626D2356A0001A0ED /* LaunchScreen.storyboard */,
+				64D2EDB926D2356A0001A0ED /* Info.plist */,
+			);
+			path = Commom;
+			sourceTree = "<group>";
+		};
 		64D2ED9F26D235670001A0ED = {
 			isa = PBXGroup;
 			children = (
@@ -61,11 +101,11 @@
 		64D2EDAA26D235670001A0ED /* mobile2youChallenge */ = {
 			isa = PBXGroup;
 			children = (
-				64D2EDAB26D235670001A0ED /* AppDelegate.swift */,
-				64D2EDAD26D235670001A0ED /* SceneDelegate.swift */,
-				64D2EDB126D2356A0001A0ED /* Assets.xcassets */,
-				64D2EDB626D2356A0001A0ED /* LaunchScreen.storyboard */,
-				64D2EDB926D2356A0001A0ED /* Info.plist */,
+				648BF3F626D23C5F00D7C689 /* Commom */,
+				648BF3F526D23C5600D7C689 /* Service */,
+				648BF3F226D23C3A00D7C689 /* Model */,
+				648BF3F326D23C4500D7C689 /* ViewModel */,
+				648BF3F426D23C4C00D7C689 /* View */,
 				64D2EDB326D2356A0001A0ED /* Preview Content */,
 			);
 			path = mobile2youChallenge;
@@ -93,7 +133,6 @@
 				9ED7B977612F9B536F8883DD /* Pods-mobile2youChallenge.debug.xcconfig */,
 				236759640BC20AE768873D04 /* Pods-mobile2youChallenge.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
