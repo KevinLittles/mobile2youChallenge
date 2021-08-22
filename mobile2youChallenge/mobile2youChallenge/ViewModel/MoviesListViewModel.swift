@@ -6,3 +6,14 @@
 //
 
 import Foundation
+import RxSwift
+
+protocol MoviesListViewModelDelegate {
+    
+}
+
+struct MoviesListViewModel {
+    
+    let delegate: MoviesListViewController?
+   
+}

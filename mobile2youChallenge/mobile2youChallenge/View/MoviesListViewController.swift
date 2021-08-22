@@ -66,3 +66,7 @@ class MoviesListViewController: UIViewController {
     }
 
 }
+
+extension MoviesListViewController: MoviesListViewModelDelegate {
+    
+}

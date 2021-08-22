@@ -7,13 +7,6 @@
 
 import Foundation
 
-// This file was generated from JSON Schema using quicktype, do not modify it directly.
-// To parse the JSON, add this file to your project and do:
-//
-//   let similarMovies = try? newJSONDecoder().decode(SimilarMovies.self, from: jsonData)
-
-import Foundation
-
 // MARK: - SimilarMovies
 struct SimilarMovies: Codable {
     let page: Int
