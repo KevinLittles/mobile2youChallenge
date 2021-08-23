@@ -16,7 +16,7 @@ struct MoviesListViewModel {
     
     let movieIdInDisplay: Int = 18 //movie chosed
     var isMovieLiked: Bool = false
-    let delegate: MoviesListViewModelDelegate?
+    var delegate: MoviesListViewModelDelegate?
    
     func getPrincipalMovie() -> Observable<MovieDetails> {
         return ServiceClient.getMovieDetails(id: movieIdInDisplay)
