@@ -96,6 +96,28 @@ extension MoviesListViewController: ViewCodeConfiguration {
         
         func setupMovieTitle() {
             
+            viewModel.getPrincipalMovie()
+                .observe(on: MainScheduler.instance)
+                .subscribe { movieDetails in
+                    
+                    self.movieTitle.text = movieDetails.title
+                    
+                } onError: { error in
+                    switch error {
+                    case ServiceError.conflict:
+                        print("Conflict error")
+                    case ServiceError.forbidden:
+                        print("Forbidden error")
+                    case ServiceError.notFound:
+                        print("Not found error")
+                    default:
+                        print("Unknown error:", error)
+            
+                    }
+                }
+                .disposed(by: disposeBag)
+            
+            movieTitle.textColor = .white
         }
         
         func setupTopLikeButtom() {
