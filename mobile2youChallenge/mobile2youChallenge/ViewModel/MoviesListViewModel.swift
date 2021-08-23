@@ -27,11 +27,17 @@ struct MoviesListViewModel {
     }
     
     func getImageByPath(path: String) -> UIImage {
-        let url = URL.init(fileURLWithPath: path)
+        if let url = URL(string: "https://image.tmdb.org/t/p/original" + path) {
         
-        let imageData:NSData = NSData(contentsOf: url)!
-
-        return UIImage(data: imageData as Data) ?? UIImage(systemName: "film")!
+            do {
+                let imageData: Data = try Data(contentsOf: url)
+                return UIImage(data: imageData as Data) ?? UIImage(systemName: "film")!
+            } catch {
+                print(error)
+            }
+        }
+        
+        return UIImage(systemName: "film")!
     }
     
     mutating func changeIsMovieLiked() {

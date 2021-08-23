@@ -57,7 +57,82 @@ extension MoviesListViewController: ViewCodeConfiguration {
     }
     
     func confirugateViews() {
+        setupMovieImage()
+        setupMovieTitle()
+        setupTopLikeButtom()
+        setupStack()
+        setupTable()
+        setupBottomLikeButtom()
         
+        func setupMovieImage() {
+            
+            viewModel.getPrincipalMovie()
+                .observe(on: MainScheduler.instance)
+                .subscribe { movieDetails in
+                    
+                    if let path = movieDetails.backdropPath {
+                        let image = self.viewModel.getImageByPath(path: path)
+                        self.movieImage.image = image
+                    } else {
+                        self.movieImage.image = UIImage(systemName: "film")!
+                    }
+                    
+                } onError: { error in
+                    switch error {
+                    case ServiceError.conflict:
+                        print("Conflict error")
+                    case ServiceError.forbidden:
+                        print("Forbidden error")
+                    case ServiceError.notFound:
+                        print("Not found error")
+                    default:
+                        print("Unknown error:", error)
+            
+                    }
+                }
+                .disposed(by: disposeBag)
+
+        }
+        
+        func setupMovieTitle() {
+            
+        }
+        
+        func setupTopLikeButtom() {
+            
+        }
+        
+        func setupStack() {
+            
+            setupLikesIcon()
+            setupLikes()
+            setupViewsIcon()
+            setupViews()
+            
+            func setupLikesIcon() {
+                
+            }
+            
+            func setupLikes() {
+                
+            }
+            
+            func setupViewsIcon() {
+                
+            }
+            
+            func setupViews() {
+                
+            }
+        }
+        
+        func setupTable() {
+            
+        }
+        
+        func setupBottomLikeButtom() {
+            
+        }
     }
     
     func setupAutoLayout() {
