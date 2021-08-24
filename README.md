@@ -1,4 +1,4 @@
-# # Aplicativo de desafio - Mobile2You
+# Aplicativo de desafio - Mobile2You
 
 ### Esse desafio se compõe em reproduzir uma tela do aplicativo TodoMoveis.
 
