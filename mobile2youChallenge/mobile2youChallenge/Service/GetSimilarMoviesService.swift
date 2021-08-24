@@ -19,6 +19,7 @@ extension ServiceClient {
     static func getSimilarMovies(id: Int) -> Observable<SimilarMovies> {
         return request(GetSimilarMoviesServiceRouter.getSimilarMovies(id: id))
     }
+    
 }
 
 enum GetSimilarMoviesServiceRouter: ServiceRouter, URLRequestConvertible {
@@ -65,7 +66,7 @@ enum GetSimilarMoviesServiceRouter: ServiceRouter, URLRequestConvertible {
     internal var parameters: Parameters? {
         switch self {
         case .getSimilarMovies:
-            //A dictionary of the key (From the constants file) and its value is returned
+
             return ["api_key" : GetSimilarMoviesServiceInfo.key]
         }
     }

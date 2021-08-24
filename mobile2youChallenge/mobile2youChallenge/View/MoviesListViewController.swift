@@ -7,10 +7,11 @@
 
 import UIKit
 import RxSwift
+import RxCocoa
 
-class MoviesListViewController: UIViewController {
+class MoviesListViewController: UIViewController, UIScrollViewDelegate {
     
-    private let disposeBag = DisposeBag()
+    private var disposeBag = DisposeBag()
     var viewModel = MoviesListViewModel()
     
     let scrollView = UIScrollView()
@@ -191,7 +192,16 @@ extension MoviesListViewController: ViewCodeConfiguration {
         }
         
         func setupTable() {
+            tableView.delegate = nil
+            tableView.dataSource = nil
+
+            tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
             
+            viewModel.getSimilarMoviesDetails()
+                .bind(to: tableView.rx.items(cellIdentifier: "cell")) { ( row, model, cell) in
+                cell.textLabel?.text = model.title
+                    
+            }.disposed(by: disposeBag)
         }
         
         func setupBottomLikeButtom() {
@@ -314,7 +324,10 @@ extension MoviesListViewController: ViewCodeConfiguration {
             tableView.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 20).isActive = true
             tableView.leftAnchor.constraint(equalTo: contentView.leftAnchor).isActive = true
             tableView.rightAnchor.constraint(equalTo: contentView.rightAnchor).isActive = true
+            
+            tableView.heightAnchor.constraint(equalTo: stackView.heightAnchor).isActive = true
         }
+        
         
         func setupBottomLikeButtom() {
             bottomLikeButtom.backgroundColor = .none
@@ -330,19 +343,8 @@ extension MoviesListViewController: ViewCodeConfiguration {
     
 }
 
-extension MoviesListViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
-    }
-    
-    
-}
-
 extension MoviesListViewController: MoviesListViewModelDelegate {
+    
     func didChangeIsMovieLiked() {
 
     }

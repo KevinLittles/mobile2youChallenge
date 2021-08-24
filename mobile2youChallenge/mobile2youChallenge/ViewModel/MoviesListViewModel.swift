@@ -7,23 +7,48 @@
 
 import Foundation
 import RxSwift
+import RxCocoa
 
 protocol MoviesListViewModelDelegate {
     func didChangeIsMovieLiked()
 }
 
-struct MoviesListViewModel {
+class MoviesListViewModel {
     
-    let movieIdInDisplay: Int = 18 //movie chosed
+    let disposeBag = DisposeBag()
+    
+    var movieId: Int = 18 //movie chosed
     var isMovieLiked: Bool = false
     var delegate: MoviesListViewModelDelegate?
    
+    func getSimilarMoviesDetails() -> Observable<[MovieDetails]> {
+        let lastMovieId = self.movieId
+        
+        return getSimilarMovies().flatMap { movies -> Observable<[MovieDetails]> in
+            var movieDetailsArray = [Observable<MovieDetails>]()
+
+            for movie in movies.results {
+                self.movieId = movie.id
+                
+                movieDetailsArray.append(self.getPrincipalMovie())
+            }
+            
+            self.movieId = lastMovieId
+            
+            let combinedArray = Observable.combineLatest(movieDetailsArray)
+
+            return combinedArray
+        }
+
+    }
+    
     func getPrincipalMovie() -> Observable<MovieDetails> {
-        return ServiceClient.getMovieDetails(id: movieIdInDisplay)
+        return ServiceClient.getMovieDetails(id: movieId)
     }
     
     func getSimilarMovies() -> Observable<SimilarMovies> {
-        return ServiceClient.getSimilarMovies(id: movieIdInDisplay)
+        
+        return ServiceClient.getSimilarMovies(id: movieId)
     }
     
     func getImageByPath(path: String) -> UIImage {
@@ -40,7 +65,7 @@ struct MoviesListViewModel {
         return UIImage(systemName: "film")!
     }
     
-    mutating func changeIsMovieLiked() {
+    func changeIsMovieLiked() {
         isMovieLiked = !isMovieLiked
         delegate?.didChangeIsMovieLiked()
     }
