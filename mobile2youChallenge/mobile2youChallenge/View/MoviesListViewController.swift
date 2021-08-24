@@ -8,6 +8,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import ChameleonFramework
 
 class MoviesListViewController: UIViewController, UIScrollViewDelegate {
     
@@ -212,6 +213,11 @@ extension MoviesListViewController: ViewCodeConfiguration {
                         self.movieImage.image = UIImage(systemName: "film")!
                     }
                     
+                    if let image = self.movieImage.image {
+                        self.movieTitle.textColor = AverageColorFromImage(image: image)
+                        self.topLikeButton.imageView?.tintColor = AverageColorFromImage(image: image)
+                    }
+                    
                 } onError: { error in
                     switch error {
                     case ServiceError.conflict:
@@ -251,8 +257,6 @@ extension MoviesListViewController: ViewCodeConfiguration {
                     }
                 }
                 .disposed(by: disposeBag)
-            
-            movieTitle.textColor = .white
         }
         
         func setupTopLikeButtom() {
@@ -358,6 +362,12 @@ extension MoviesListViewController: ViewCodeConfiguration {
                     } else {
                         cell.movieGenreLabel.text = model.genres[0].name
                     }
+                    
+                    if let image = self.movieImage.image {
+                        cell.movieYearLabel.textColor = AverageColorFromImage(image: image)
+                        cell.movieTitleLabel.textColor = AverageColorFromImage(image: image)
+                    }
+                    
             }.disposed(by: disposeBag)
         }
         
