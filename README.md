@@ -1,6 +1,6 @@
 # Aplicativo de desafio - Mobile2You
 
-### Esse desafio se compõe em reproduzir uma tela do aplicativo TodoMoveis.
+### Esse desafio se compõe em reproduzir uma tela do aplicativo TodoMovies.
 
 ![460x0w](https://user-images.githubusercontent.com/49958388/130621852-faf48405-050a-49d1-8664-2c5577868bed.png)
 
