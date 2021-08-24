@@ -67,25 +67,8 @@ extension MoviesListViewController: ViewCodeConfiguration {
     }
     
     func setupAutoLayout() {
-        setupScroll()
-        setupMovieImage()
-        setupMovieTitle()
-        setupTopLikeButtom()
-        setupLikesIcon()
-        setupLikes()
-        setupViewsIcon()
-        setupViews()
-        setupTable()
         
         func setupScroll() {
-            scrollView.translatesAutoresizingMaskIntoConstraints = false
-            scrollView.contentInsetAdjustmentBehavior = .never
-
-            scrollView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true;
-            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true;
-            scrollView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
-            
-            setupContent()
             
             func setupContent() {
                 contentView.translatesAutoresizingMaskIntoConstraints = false
@@ -96,19 +79,19 @@ extension MoviesListViewController: ViewCodeConfiguration {
                 contentView.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
                 contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
             }
+            
+            scrollView.translatesAutoresizingMaskIntoConstraints = false
+            scrollView.contentInsetAdjustmentBehavior = .never
+
+            scrollView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true;
+            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true;
+            scrollView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+            
+            setupContent()
+            
         }
         
         func setupMovieImage() {
-            movieImage.translatesAutoresizingMaskIntoConstraints = false
-            movieImage.contentMode = .scaleAspectFill
-            
-            movieImage.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-            movieImage.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
-            
-            movieImage.widthAnchor.constraint(equalTo: contentView.widthAnchor).isActive = true
-            movieImage.heightAnchor.constraint(equalTo: contentView.widthAnchor).isActive = true
-            
-            setupMovieImageFade()
             
             func setupMovieImageFade() {
                 movieImageFade.translatesAutoresizingMaskIntoConstraints = false
@@ -121,6 +104,18 @@ extension MoviesListViewController: ViewCodeConfiguration {
                 movieImageFade.heightAnchor.constraint(equalTo: movieImage.heightAnchor, multiplier: 1/3).isActive = true
 
             }
+            
+            movieImage.translatesAutoresizingMaskIntoConstraints = false
+            movieImage.contentMode = .scaleAspectFill
+            
+            movieImage.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
+            movieImage.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
+            
+            movieImage.widthAnchor.constraint(equalTo: contentView.widthAnchor).isActive = true
+            movieImage.heightAnchor.constraint(equalTo: contentView.widthAnchor).isActive = true
+            
+            setupMovieImageFade()
+            
         }
         
         func setupMovieTitle() {
@@ -215,16 +210,26 @@ extension MoviesListViewController: ViewCodeConfiguration {
 
         }
         
-    }
-    
-    func confirugateViews() {
+        setupScroll()
         setupMovieImage()
         setupMovieTitle()
         setupTopLikeButtom()
-        setupStack()
+        setupLikesIcon()
+        setupLikes()
+        setupViewsIcon()
+        setupViews()
         setupTable()
         
+    }
+    
+    func confirugateViews() {
+        
         func setupMovieImage() {
+            
+            func setupMovieImageFade() {
+                movieImageFade.image = UIImage.init(named: "movieImageFade")
+
+            }
             
             viewModel.getPrincipalMovie()
                 .observe(on: MainScheduler.instance)
@@ -258,11 +263,6 @@ extension MoviesListViewController: ViewCodeConfiguration {
                 .disposed(by: disposeBag)
 
             setupMovieImageFade()
-            
-            func setupMovieImageFade() {
-                movieImageFade.image = UIImage.init(named: "movieImageFade")
-
-            }
             
         }
         
@@ -303,11 +303,6 @@ extension MoviesListViewController: ViewCodeConfiguration {
         }
         
         func setupStack() {
-            
-            setupLikesIcon()
-            setupLikes()
-            setupViewsIcon()
-            setupViews()
             
             func setupLikesIcon() {
                 likesIcon.image = UIImage(systemName: "heart.fill")
@@ -366,6 +361,12 @@ extension MoviesListViewController: ViewCodeConfiguration {
                     .disposed(by: disposeBag)
                 
             }
+            
+            setupLikesIcon()
+            setupLikes()
+            setupViewsIcon()
+            setupViews()
+            
         }
         
         func setupTable() {
@@ -406,6 +407,12 @@ extension MoviesListViewController: ViewCodeConfiguration {
             }.disposed(by: disposeBag)
             
         }
+        
+        setupMovieImage()
+        setupMovieTitle()
+        setupTopLikeButtom()
+        setupStack()
+        setupTable()
         
     }
 

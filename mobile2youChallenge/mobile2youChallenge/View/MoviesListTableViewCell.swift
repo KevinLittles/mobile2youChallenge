@@ -44,8 +44,6 @@ extension MoviesListTableViewCell: ViewCodeConfiguration {
     }
     
     func setupAutoLayout() {
-        setupMovieImage()
-        setupVerticalStackView()
         
         func setupMovieImage() {
             movieImage.translatesAutoresizingMaskIntoConstraints = false
@@ -62,17 +60,6 @@ extension MoviesListTableViewCell: ViewCodeConfiguration {
         }
         
         func setupVerticalStackView() {
-            verticalStackView.translatesAutoresizingMaskIntoConstraints = false
-            verticalStackView.axis = .vertical
-            verticalStackView.alignment = .leading
-            verticalStackView.spacing = 0
-            
-            verticalStackView.leftAnchor.constraint(equalTo: movieImage.rightAnchor, constant: 10).isActive = true
-            verticalStackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
-            verticalStackView.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.5).isActive = true
-            
-            setupMovieTitleLabel()
-            setupHorizontalContentView()
             
             func setupMovieTitleLabel() {
                 movieTitleLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -85,12 +72,6 @@ extension MoviesListTableViewCell: ViewCodeConfiguration {
             }
             
             func setupHorizontalContentView() {
-                horizontalContentView.translatesAutoresizingMaskIntoConstraints = false
-
-                horizontalContentView.heightAnchor.constraint(equalTo: movieYearLabel.heightAnchor).isActive = true
-                
-                setupMovieYearLabel()
-                setupMovieGenreLabel()
                 
                 func setupMovieYearLabel() {
                     movieYearLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -118,9 +99,32 @@ extension MoviesListTableViewCell: ViewCodeConfiguration {
                     movieGenreLabel.leftAnchor.constraint(equalTo: movieYearLabel.rightAnchor, constant: 5).isActive = true
                     movieGenreLabel.centerYAnchor.constraint(equalTo: horizontalContentView.centerYAnchor).isActive = true
                 }
+                
+                horizontalContentView.translatesAutoresizingMaskIntoConstraints = false
+
+                horizontalContentView.heightAnchor.constraint(equalTo: movieYearLabel.heightAnchor).isActive = true
+                
+                setupMovieYearLabel()
+                setupMovieGenreLabel()
+                
             }
             
+            verticalStackView.translatesAutoresizingMaskIntoConstraints = false
+            verticalStackView.axis = .vertical
+            verticalStackView.alignment = .leading
+            verticalStackView.spacing = 0
+            
+            verticalStackView.leftAnchor.constraint(equalTo: movieImage.rightAnchor, constant: 10).isActive = true
+            verticalStackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+            verticalStackView.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.5).isActive = true
+            
+            setupMovieTitleLabel()
+            setupHorizontalContentView()
+            
         }
+        
+        setupMovieImage()
+        setupVerticalStackView()
         
     }
     
