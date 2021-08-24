@@ -254,7 +254,7 @@ extension MoviesListViewController: ViewCodeConfiguration {
         }
         
         func setupTopLikeButtom() {
-            
+            topLikeButton.imageView?.image = UIImage(systemName: "heart")
         }
         
         func setupStack() {
@@ -265,7 +265,7 @@ extension MoviesListViewController: ViewCodeConfiguration {
             setupViews()
             
             func setupLikesIcon() {
-                
+                likesIcon.image = UIImage(systemName: "heart.fill")
             }
             
             func setupLikes() {
@@ -294,7 +294,7 @@ extension MoviesListViewController: ViewCodeConfiguration {
             }
             
             func setupViewsIcon() {
-                
+                viewsIcon.image = UIImage(systemName: "eye.fill")
             }
             
             func setupViews() {
@@ -348,7 +348,8 @@ extension MoviesListViewController: ViewCodeConfiguration {
         }
         
         func setupBottomLikeButtom() {
-            
+            bottomLikeButtom.titleLabel?.text = "Like"
+            bottomLikeButtom.imageView?.image = UIImage(systemName: "heart")
         }
     }
 }
@@ -356,6 +357,16 @@ extension MoviesListViewController: ViewCodeConfiguration {
 extension MoviesListViewController: MoviesListViewModelDelegate {
     
     func didChangeIsMovieLiked() {
-
+        if viewModel.isMovieLiked == true {
+            bottomLikeButtom.titleLabel?.text = "Stop liking"
+            bottomLikeButtom.imageView?.image = UIImage(systemName: "heart.fill")
+            
+            topLikeButton.imageView?.image = UIImage(systemName: "heart.fill")
+        } else {
+            bottomLikeButtom.titleLabel?.text = "Like"
+            bottomLikeButtom.imageView?.image = UIImage(systemName: "heart")
+            
+            topLikeButton.imageView?.image = UIImage(systemName: "heart")
+        }
     }
 }
