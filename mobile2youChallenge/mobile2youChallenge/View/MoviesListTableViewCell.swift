@@ -58,7 +58,7 @@ extension MoviesListTableViewCell: ViewCodeConfiguration {
             
             movieImage.contentMode = .scaleAspectFill
             movieImage.clipsToBounds = true
-        
+            
         }
         
         func setupVerticalStackView() {

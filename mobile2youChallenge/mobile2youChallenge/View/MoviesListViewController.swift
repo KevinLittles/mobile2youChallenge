@@ -17,6 +17,7 @@ class MoviesListViewController: UIViewController, UIScrollViewDelegate {
     
     let scrollView = UIScrollView()
     let movieImage = UIImageView()
+    let movieImageFade = UIImageView()
     let movieTitle = UILabel()
     let topLikeButton = UIButton()
     let likesIcon = UIImageView()
@@ -47,6 +48,7 @@ extension MoviesListViewController: ViewCodeConfiguration {
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
         contentView.addSubview(movieImage)
+        movieImage.addSubview(movieImageFade)
         contentView.addSubview(movieTitle)
         contentView.addSubview(topLikeButton)
         contentView.addSubview(likesIcon)
@@ -97,6 +99,20 @@ extension MoviesListViewController: ViewCodeConfiguration {
             
             movieImage.widthAnchor.constraint(equalTo: contentView.widthAnchor).isActive = true
             movieImage.heightAnchor.constraint(equalTo: contentView.widthAnchor).isActive = true
+            
+            setupMovieImageFade()
+            
+            func setupMovieImageFade() {
+                movieImageFade.translatesAutoresizingMaskIntoConstraints = false
+                movieImageFade.contentMode = .scaleAspectFill
+                
+                movieImageFade.centerXAnchor.constraint(equalTo: movieImage.centerXAnchor).isActive = true
+                movieImageFade.bottomAnchor.constraint(equalTo: movieImage.bottomAnchor).isActive = true
+                
+                movieImageFade.widthAnchor.constraint(equalTo: movieImage.widthAnchor).isActive = true
+                movieImageFade.heightAnchor.constraint(equalTo: movieImage.heightAnchor, multiplier: 1/3).isActive = true
+
+            }
         }
         
         func setupMovieTitle() {
@@ -233,6 +249,13 @@ extension MoviesListViewController: ViewCodeConfiguration {
                 }
                 .disposed(by: disposeBag)
 
+            setupMovieImageFade()
+            
+            func setupMovieImageFade() {
+                movieImageFade.image = UIImage.init(named: "movieImageFade")
+
+            }
+            
         }
         
         func setupMovieTitle() {
