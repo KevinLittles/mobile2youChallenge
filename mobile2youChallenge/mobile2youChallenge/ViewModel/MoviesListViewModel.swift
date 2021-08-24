@@ -17,7 +17,7 @@ class MoviesListViewModel {
     
     let disposeBag = DisposeBag()
     
-    var movieId: Int = 18 //movie chosed
+    var movieId: Int = 300 //movie chosed
     var isMovieLiked: Bool = false
     var delegate: MoviesListViewModelDelegate?
    

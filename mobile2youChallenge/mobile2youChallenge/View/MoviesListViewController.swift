@@ -18,26 +18,26 @@ class MoviesListViewController: UIViewController, UIScrollViewDelegate {
     let movieImage = UIImageView()
     let movieTitle = UILabel()
     let topLikeButton = UIButton()
-    let stackView = UIStackView()
     let likesIcon = UIImageView()
     let likes = UILabel()
     let viewsIcon = UIImageView()
     let views = UILabel()
     let tableView = UITableView()
-    let bottomLikeButtom = UIButton()
     let contentView = UIView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         viewModel.delegate = self
-    
+        
         apllyViewCode()
     }
     
-    @objc func likeButtonAction() {
-        
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
     }
+
 }
 
 extension MoviesListViewController: ViewCodeConfiguration {
@@ -48,13 +48,11 @@ extension MoviesListViewController: ViewCodeConfiguration {
         contentView.addSubview(movieImage)
         contentView.addSubview(movieTitle)
         contentView.addSubview(topLikeButton)
-        contentView.addSubview(stackView)
-        stackView.addArrangedSubview(likesIcon)
-        stackView.addArrangedSubview(likes)
-        stackView.addArrangedSubview(viewsIcon)
-        stackView.addArrangedSubview(views)
+        contentView.addSubview(likesIcon)
+        contentView.addSubview(likes)
+        contentView.addSubview(viewsIcon)
+        contentView.addSubview(views)
         contentView.addSubview(tableView)
-        contentView.addSubview(bottomLikeButtom)
     }
     
     func setupAutoLayout() {
@@ -62,12 +60,15 @@ extension MoviesListViewController: ViewCodeConfiguration {
         setupMovieImage()
         setupMovieTitle()
         setupTopLikeButtom()
-        setupStack()
+        setupLikesIcon()
+        setupLikes()
+        setupViewsIcon()
+        setupViews()
         setupTable()
-        setupBottomLikeButtom()
         
         func setupScroll() {
             scrollView.translatesAutoresizingMaskIntoConstraints = false
+            scrollView.contentInsetAdjustmentBehavior = .never
 
             scrollView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true;
             scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true;
@@ -88,6 +89,7 @@ extension MoviesListViewController: ViewCodeConfiguration {
         
         func setupMovieImage() {
             movieImage.translatesAutoresizingMaskIntoConstraints = false
+            movieImage.contentMode = .scaleAspectFill
             
             movieImage.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
             movieImage.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
@@ -101,12 +103,11 @@ extension MoviesListViewController: ViewCodeConfiguration {
             movieTitle.sizeToFit()
             movieTitle.translatesAutoresizingMaskIntoConstraints = false
 
-            movieTitle.font = UIFont.systemFont(ofSize: 28)
-            movieTitle.frame.size = CGSize(width: movieTitle.intrinsicContentSize.width,height: movieTitle.intrinsicContentSize.height)
+            movieTitle.font = UIFont.systemFont(ofSize: 28, weight: .heavy)
             
-            movieTitle.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 10).isActive = true
-            movieTitle.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -10).isActive = true
-            movieTitle.topAnchor.constraint(equalTo: movieImage.bottomAnchor, constant: 20).isActive = true
+            movieTitle.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 5).isActive = true
+            movieTitle.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -5).isActive = true
+            movieTitle.topAnchor.constraint(equalTo: movieImage.bottomAnchor).isActive = true
         }
         
         func setupTopLikeButtom() {
@@ -114,79 +115,81 @@ extension MoviesListViewController: ViewCodeConfiguration {
             topLikeButton.addTarget(self, action: #selector(likeButtonAction), for: .touchUpInside)
             topLikeButton.translatesAutoresizingMaskIntoConstraints = false
             
-            topLikeButton.frame.size = CGSize(width: 50 ,height: 50)
+            topLikeButton.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 1/15).isActive = true
+            topLikeButton.heightAnchor.constraint(equalTo: topLikeButton.widthAnchor).isActive = true
             
-            topLikeButton.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -10).isActive = true
-            topLikeButton.topAnchor.constraint(equalTo: movieImage.bottomAnchor, constant: 20).isActive = true
+            topLikeButton.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -5).isActive = true
+            topLikeButton.topAnchor.constraint(equalTo: movieImage.bottomAnchor).isActive = true
         }
         
-        func setupStack() {
-            stackView.axis = .horizontal
-            stackView.alignment = .fill // .leading .firstBaseline .center .trailing .lastBaseline
-            stackView.distribution = .fillEqually // .fillEqually .fillProportionally .equalSpacing .equalCentering
-            stackView.spacing = 5
-            stackView.translatesAutoresizingMaskIntoConstraints = false
+        func setupLikesIcon() {
+            likesIcon.translatesAutoresizingMaskIntoConstraints = false
             
-            stackView.frame.size = CGSize(width: 300,height: 100)
+            likesIcon.heightAnchor.constraint(equalTo: likes.heightAnchor).isActive = true
             
-            stackView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 3/4).isActive = true
-            stackView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
+            likesIcon.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 5).isActive = true
+            likesIcon.topAnchor.constraint(equalTo: movieTitle.bottomAnchor, constant: 10).isActive = true
             
-            stackView.topAnchor.constraint(equalTo: movieTitle.bottomAnchor, constant: 20).isActive = true
+            likesIcon.contentMode = .scaleAspectFit
+            likesIcon.clipsToBounds = true
             
-            setupLikesIcon()
-            setupLikes()
-            setupViewsIcon()
-            setupViews()
+            likesIcon.tintColor = .lightGray
+        }
+        
+        func setupLikes() {
+            likes.translatesAutoresizingMaskIntoConstraints = false
             
-            func setupLikesIcon() {
-                likesIcon.translatesAutoresizingMaskIntoConstraints = false
-                
-                likesIcon.frame.size = CGSize(width: 100,height: 100)
-            }
+            likes.font = UIFont.systemFont(ofSize: 16)
+            likes.textColor = .lightGray
+            likes.numberOfLines = 1
+            likes.sizeToFit()
             
-            func setupLikes() {
-                likes.translatesAutoresizingMaskIntoConstraints = false
-                
-                likes.font = UIFont.systemFont(ofSize: 16)
-                likes.sizeToFit()
-            }
+            likes.leftAnchor.constraint(equalTo: likesIcon.rightAnchor, constant: 5).isActive = true
+            likes.topAnchor.constraint(equalTo: movieTitle.bottomAnchor, constant: 10).isActive = true
             
-            func setupViewsIcon() {
-                viewsIcon.translatesAutoresizingMaskIntoConstraints = false
-                
-                likesIcon.frame.size = CGSize(width: 100,height: 100)
-            }
+            likes.heightAnchor.constraint(equalToConstant: 16).isActive = true
+        }
+        
+        func setupViewsIcon() {
+            viewsIcon.translatesAutoresizingMaskIntoConstraints = false
             
-            func setupViews() {
-                views.translatesAutoresizingMaskIntoConstraints = false
-                
-                likes.font = UIFont.systemFont(ofSize: 16)
-                likes.sizeToFit()
-            }
+            viewsIcon.heightAnchor.constraint(equalTo: views.heightAnchor).isActive = true
+            
+            viewsIcon.leftAnchor.constraint(equalTo: likes.rightAnchor, constant: 20).isActive = true
+            viewsIcon.topAnchor.constraint(equalTo: movieTitle.bottomAnchor, constant: 10).isActive = true
+            
+            viewsIcon.contentMode = .scaleAspectFit
+            viewsIcon.clipsToBounds = true
+            
+            viewsIcon.tintColor = .lightGray
+        }
+        
+        func setupViews() {
+            views.translatesAutoresizingMaskIntoConstraints = false
+            
+            views.font = UIFont.systemFont(ofSize: 16)
+            views.textColor = .lightGray
+            views.numberOfLines = 1
+            views.sizeToFit()
+            
+            views.leftAnchor.constraint(equalTo: viewsIcon.rightAnchor, constant: 5).isActive = true
+            views.topAnchor.constraint(equalTo: movieTitle.bottomAnchor, constant: 10).isActive = true
+            
+            views.heightAnchor.constraint(equalToConstant: 16).isActive = true
         }
         
         func setupTable() {
             tableView.translatesAutoresizingMaskIntoConstraints = false
             
-            tableView.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 20).isActive = true
+            tableView.topAnchor.constraint(equalTo: likes.bottomAnchor, constant: 10).isActive = true
             tableView.leftAnchor.constraint(equalTo: contentView.leftAnchor).isActive = true
             tableView.rightAnchor.constraint(equalTo: contentView.rightAnchor).isActive = true
+            tableView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
             
-            tableView.heightAnchor.constraint(equalTo: stackView.heightAnchor).isActive = true
+            tableView.heightAnchor.constraint(equalToConstant: (view.frame.size.height/8)*20).isActive = true
+
         }
         
-        
-        func setupBottomLikeButtom() {
-            bottomLikeButtom.backgroundColor = .none
-            bottomLikeButtom.addTarget(self, action: #selector(likeButtonAction), for: .touchUpInside)
-            bottomLikeButtom.translatesAutoresizingMaskIntoConstraints = false
-            
-            bottomLikeButtom.topAnchor.constraint(equalTo: tableView.bottomAnchor, constant: 20).isActive = true
-            bottomLikeButtom.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 100).isActive = true
-            bottomLikeButtom.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -100).isActive = true
-            bottomLikeButtom.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
-        }
     }
     
     func confirugateViews() {
@@ -195,7 +198,6 @@ extension MoviesListViewController: ViewCodeConfiguration {
         setupTopLikeButtom()
         setupStack()
         setupTable()
-        setupBottomLikeButtom()
         
         func setupMovieImage() {
             
@@ -254,7 +256,15 @@ extension MoviesListViewController: ViewCodeConfiguration {
         }
         
         func setupTopLikeButtom() {
-            topLikeButton.imageView?.image = UIImage(systemName: "heart")
+            topLikeButton.setImage(UIImage(systemName: "heart"), for: .normal)
+            topLikeButton.imageView?.contentMode = .scaleAspectFit
+            
+            topLikeButton.imageEdgeInsets = UIEdgeInsets(
+                    top: (topLikeButton.frame.size.height),
+                    left: (topLikeButton.frame.size.width),
+                    bottom: (topLikeButton.frame.size.height),
+                    right: (topLikeButton.frame.size.width))
+
         }
         
         func setupStack() {
@@ -274,7 +284,7 @@ extension MoviesListViewController: ViewCodeConfiguration {
                     .observe(on: MainScheduler.instance)
                     .subscribe { movieDetails in
                         
-                        self.likes.text = String(movieDetails.voteCount)
+                        self.likes.text = String(movieDetails.voteCount) + " likes"
                         
                     } onError: { error in
                         switch error {
@@ -326,47 +336,67 @@ extension MoviesListViewController: ViewCodeConfiguration {
         func setupTable() {
             tableView.delegate = nil
             tableView.dataSource = nil
-
+            tableView.rx.setDelegate(self)
+                .disposed(by: disposeBag)
+            
+            tableView.isUserInteractionEnabled = false
+        
             tableView.register(MoviesListTableViewCell.self, forCellReuseIdentifier: "movieCell")
             
             viewModel.getSimilarMoviesDetails()
                 .bind(to: tableView.rx.items(cellIdentifier: "movieCell", cellType: MoviesListTableViewCell.self)) { ( row, model, cell) in
                     
                     cell.movieTitleLabel.text = model.title
+                        
                     if let path = model.backdropPath {
-                        cell.imageView?.image = self.viewModel.getImageByPath(path: path)
+                        cell.movieImage.image = self.viewModel.getImageByPath(path: path)
                     }
-                    cell.movieYearLabel.text = model.releaseDate
+                    cell.movieYearLabel.text = String(model.releaseDate.prefix(4))
                     
                     if model.genres.count >= 2 {
                         cell.movieGenreLabel.text = model.genres[0].name + ", " + model.genres[1].name
                     } else {
                         cell.movieGenreLabel.text = model.genres[0].name
                     }
-                    
             }.disposed(by: disposeBag)
         }
         
-        func setupBottomLikeButtom() {
-            bottomLikeButtom.titleLabel?.text = "Like"
-            bottomLikeButtom.imageView?.image = UIImage(systemName: "heart")
-        }
     }
+
+}
+
+extension MoviesListViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return view.frame.size.height/8
+    }
+    
 }
 
 extension MoviesListViewController: MoviesListViewModelDelegate {
     
     func didChangeIsMovieLiked() {
         if viewModel.isMovieLiked == true {
-            bottomLikeButtom.titleLabel?.text = "Stop liking"
-            bottomLikeButtom.imageView?.image = UIImage(systemName: "heart.fill")
             
-            topLikeButton.imageView?.image = UIImage(systemName: "heart.fill")
+            topLikeButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+            topLikeButton.imageView?.contentMode = .scaleAspectFit
+            topLikeButton.imageEdgeInsets = UIEdgeInsets(
+                    top: (topLikeButton.frame.size.height),
+                    left: (topLikeButton.frame.size.width),
+                    bottom: (topLikeButton.frame.size.height),
+                    right: (topLikeButton.frame.size.width))
         } else {
-            bottomLikeButtom.titleLabel?.text = "Like"
-            bottomLikeButtom.imageView?.image = UIImage(systemName: "heart")
             
-            topLikeButton.imageView?.image = UIImage(systemName: "heart")
+            topLikeButton.setImage(UIImage(systemName: "heart"), for: .normal)
+            topLikeButton.imageView?.contentMode = .scaleAspectFit
+            topLikeButton.imageEdgeInsets = UIEdgeInsets(
+                    top: (topLikeButton.frame.size.height),
+                    left: (topLikeButton.frame.size.width),
+                    bottom: (topLikeButton.frame.size.height),
+                    right: (topLikeButton.frame.size.width))
         }
+    }
+    
+    @objc func likeButtonAction() {
+        viewModel.changeIsMovieLiked()
     }
 }

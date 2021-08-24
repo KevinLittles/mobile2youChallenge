@@ -21,6 +21,8 @@ class MoviesListTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
+        self.backgroundColor = .black
+        
         apllyViewCode()
     }
     
@@ -35,10 +37,10 @@ extension MoviesListTableViewCell: ViewCodeConfiguration {
     func buildHierarchy() {
         contentView.addSubview(movieImage)
         contentView.addSubview(verticalStackView)
-        verticalStackView.addSubview(movieTitleLabel)
-        verticalStackView.addSubview(horizontalContentView)
+        verticalStackView.addArrangedSubview(movieTitleLabel)
         horizontalContentView.addSubview(movieYearLabel)
         horizontalContentView.addSubview(movieGenreLabel)
+        verticalStackView.addArrangedSubview(horizontalContentView)
     }
     
     func setupAutoLayout() {
@@ -49,18 +51,24 @@ extension MoviesListTableViewCell: ViewCodeConfiguration {
             movieImage.translatesAutoresizingMaskIntoConstraints = false
             
             movieImage.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 10).isActive = true
-            movieImage.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
+            movieImage.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+            
             movieImage.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.8).isActive = true
-            movieImage.contentMode = .scaleAspectFit
+            movieImage.widthAnchor.constraint(equalTo: movieImage.heightAnchor, multiplier:  0.5625).isActive = true
+            
+            movieImage.contentMode = .scaleAspectFill
+            movieImage.clipsToBounds = true
+        
         }
         
         func setupVerticalStackView() {
             verticalStackView.translatesAutoresizingMaskIntoConstraints = false
-            verticalStackView.alignment = .center
+            verticalStackView.axis = .vertical
+            verticalStackView.alignment = .leading
             verticalStackView.spacing = 5
             
             verticalStackView.leftAnchor.constraint(equalTo: movieImage.rightAnchor, constant: 10).isActive = true
-            verticalStackView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
+            verticalStackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
             verticalStackView.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.5).isActive = true
             
             setupMovieTitleLabel()
@@ -79,7 +87,6 @@ extension MoviesListTableViewCell: ViewCodeConfiguration {
             func setupHorizontalContentView() {
                 horizontalContentView.translatesAutoresizingMaskIntoConstraints = false
 
-                horizontalContentView.leftAnchor.constraint(equalTo: verticalStackView.rightAnchor).isActive = true
                 horizontalContentView.heightAnchor.constraint(equalTo: movieYearLabel.heightAnchor).isActive = true
                 
                 setupMovieYearLabel()
@@ -95,7 +102,7 @@ extension MoviesListTableViewCell: ViewCodeConfiguration {
                     movieYearLabel.frame.size = CGSize(width: movieYearLabel.intrinsicContentSize.width,height: movieYearLabel.intrinsicContentSize.height)
                     
                     movieYearLabel.leftAnchor.constraint(equalTo: horizontalContentView.leftAnchor).isActive = true
-                    movieYearLabel.centerXAnchor.constraint(equalTo: horizontalContentView.centerXAnchor).isActive = true
+                    movieYearLabel.centerYAnchor.constraint(equalTo: horizontalContentView.centerYAnchor).isActive = true
                 }
                 
                 func setupMovieGenreLabel() {
@@ -105,10 +112,11 @@ extension MoviesListTableViewCell: ViewCodeConfiguration {
                     movieGenreLabel.sizeToFit()
 
                     movieGenreLabel.font = UIFont.systemFont(ofSize: 14)
+                    movieGenreLabel.textColor = .lightGray
                     movieGenreLabel.frame.size = CGSize(width: movieGenreLabel.intrinsicContentSize.width,height: movieGenreLabel.intrinsicContentSize.height)
                     
-                    movieGenreLabel.leftAnchor.constraint(equalTo: movieYearLabel.leftAnchor, constant: 5).isActive = true
-                    movieGenreLabel.centerXAnchor.constraint(equalTo: horizontalContentView.centerXAnchor).isActive = true
+                    movieGenreLabel.leftAnchor.constraint(equalTo: movieYearLabel.rightAnchor, constant: 5).isActive = true
+                    movieGenreLabel.centerYAnchor.constraint(equalTo: horizontalContentView.centerYAnchor).isActive = true
                 }
             }
             
@@ -116,9 +124,7 @@ extension MoviesListTableViewCell: ViewCodeConfiguration {
         
     }
     
-    func confirugateViews() {
-        
-    }
+    func confirugateViews() {} //data binding is in table ViewController
     
     
 }
