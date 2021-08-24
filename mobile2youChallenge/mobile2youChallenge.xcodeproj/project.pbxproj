@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		645B1A6226D4AD450032B497 /* MoviesListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 645B1A6126D4AD450032B497 /* MoviesListTableViewCell.swift */; };
 		648BF3F826D23D9500D7C689 /* MoviesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 648BF3F726D23D9500D7C689 /* MoviesListViewController.swift */; };
 		648BF3FA26D23E1E00D7C689 /* ViewCodeConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 648BF3F926D23E1E00D7C689 /* ViewCodeConfiguration.swift */; };
 		648BF3FC26D244C500D7C689 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 648BF3FB26D244C500D7C689 /* Service.swift */; };
@@ -26,6 +27,7 @@
 /* Begin PBXFileReference section */
 		236759640BC20AE768873D04 /* Pods-mobile2youChallenge.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mobile2youChallenge.release.xcconfig"; path = "Target Support Files/Pods-mobile2youChallenge/Pods-mobile2youChallenge.release.xcconfig"; sourceTree = "<group>"; };
 		37187C88B6ADC269925F82D3 /* Pods_mobile2youChallenge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mobile2youChallenge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		645B1A6126D4AD450032B497 /* MoviesListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesListTableViewCell.swift; sourceTree = "<group>"; };
 		648BF3F726D23D9500D7C689 /* MoviesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesListViewController.swift; sourceTree = "<group>"; };
 		648BF3F926D23E1E00D7C689 /* ViewCodeConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewCodeConfiguration.swift; sourceTree = "<group>"; };
 		648BF3FB26D244C500D7C689 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
@@ -77,6 +79,7 @@
 			isa = PBXGroup;
 			children = (
 				648BF3F726D23D9500D7C689 /* MoviesListViewController.swift */,
+				645B1A6126D4AD450032B497 /* MoviesListTableViewCell.swift */,
 				648BF3F926D23E1E00D7C689 /* ViewCodeConfiguration.swift */,
 			);
 			path = View;
@@ -278,6 +281,7 @@
 				648BF3FA26D23E1E00D7C689 /* ViewCodeConfiguration.swift in Sources */,
 				648BF3FE26D247A400D7C689 /* GetMovieDetailsService.swift in Sources */,
 				648BF40426D2DE5500D7C689 /* SimilarMovies.swift in Sources */,
+				645B1A6226D4AD450032B497 /* MoviesListTableViewCell.swift in Sources */,
 				648BF40226D2DDC400D7C689 /* MovieDetails.swift in Sources */,
 				648BF40626D3064B00D7C689 /* MoviesListViewModel.swift in Sources */,
 				64D2EDAC26D235670001A0ED /* AppDelegate.swift in Sources */,
