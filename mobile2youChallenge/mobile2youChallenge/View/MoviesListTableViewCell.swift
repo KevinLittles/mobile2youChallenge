@@ -65,7 +65,7 @@ extension MoviesListTableViewCell: ViewCodeConfiguration {
             verticalStackView.translatesAutoresizingMaskIntoConstraints = false
             verticalStackView.axis = .vertical
             verticalStackView.alignment = .leading
-            verticalStackView.spacing = 5
+            verticalStackView.spacing = 0
             
             verticalStackView.leftAnchor.constraint(equalTo: movieImage.rightAnchor, constant: 10).isActive = true
             verticalStackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
