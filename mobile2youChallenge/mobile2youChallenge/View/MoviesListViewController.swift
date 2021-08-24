@@ -27,6 +27,8 @@ class MoviesListViewController: UIViewController, UIScrollViewDelegate {
     let tableView = UITableView()
     let contentView = UIView()
     
+    var vSpinner: UIView?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -38,6 +40,8 @@ class MoviesListViewController: UIViewController, UIScrollViewDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
+        
+        showSpinner()
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -395,7 +399,12 @@ extension MoviesListViewController: ViewCodeConfiguration {
                         cell.movieTitleLabel.textColor = AverageColorFromImage(image: image)
                     }
                     
+                    if row == 19 {
+                        self.removeSpinner()
+                    }
+                    
             }.disposed(by: disposeBag)
+            
         }
         
     }
@@ -435,5 +444,30 @@ extension MoviesListViewController: MoviesListViewModelDelegate {
     
     @objc func likeButtonAction() {
         viewModel.changeIsMovieLiked()
+    }
+}
+
+extension MoviesListViewController {
+    func showSpinner() {
+        let spinnerView = UIView.init(frame: self.view.bounds)
+        spinnerView.backgroundColor = UIColor.init(red: 0.1, green: 0.1, blue: 0.1, alpha: 0.7)
+        let ai = UIActivityIndicatorView(style: .large)
+        ai.color = .white
+        ai.startAnimating()
+        ai.center = spinnerView.center
+        
+        DispatchQueue.main.async {
+            spinnerView.addSubview(ai)
+            self.view.addSubview(spinnerView)
+        }
+        
+        vSpinner = spinnerView
+    }
+    
+    func removeSpinner() {
+        DispatchQueue.main.async {
+            self.vSpinner?.removeFromSuperview()
+            self.vSpinner = nil
+        }
     }
 }
